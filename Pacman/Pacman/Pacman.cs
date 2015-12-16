@@ -14,12 +14,16 @@ namespace Pacman
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Pacman : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        //Attributs
+        Carte map;
+        Joueur pacman;
+
+        public Pacman()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -34,6 +38,8 @@ namespace Pacman
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            map = new Carte(Content);
+            pacman = new Joueur(Content);
 
             base.Initialize();
         }
@@ -47,7 +53,11 @@ namespace Pacman
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            //  changing the back buffer size changes the window size (when in windowed mode)
+            graphics.PreferredBackBufferWidth = 560;
+            graphics.PreferredBackBufferHeight = 620;
+            graphics.ApplyChanges();
+
         }
 
         /// <summary>
@@ -71,6 +81,7 @@ namespace Pacman
                 this.Exit();
 
             // TODO: Add your update logic here
+            pacman.update();
 
             base.Update(gameTime);
         }
@@ -81,9 +92,11 @@ namespace Pacman
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+            map.draw(spriteBatch);
+            pacman.draw(spriteBatch);
 
             base.Draw(gameTime);
         }
