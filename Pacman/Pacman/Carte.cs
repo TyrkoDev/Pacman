@@ -67,20 +67,47 @@ namespace Pacman
             {
                 for (int j = 0; j < NB_COL; j++)
                 {
-                    if (map[i, j] == 0)
+                    if ((i == 23) && (j == 1))
+                    {
+                        ObjetAnime pvr = load("pouvoir");
+                        if (pvr != null)
+                            listeObjets[i, j] = pvr;
+                    }
+                    else if ((i == 4) && (j == 1))
+                    {
+                        ObjetAnime pvr = load("pouvoir");
+                        if (pvr != null)
+                            listeObjets[i, j] = pvr;
+                    }
+                    else if ((i == 4) && (j == 26))
+                    {
+                        ObjetAnime pvr = load("pouvoir");
+                        if (pvr != null)
+                            listeObjets[i, j] = pvr;
+                    }
+                    else if ((i == 23) && (j == 26))
+                    {
+                        ObjetAnime pvr = load("pouvoir");
+                        if (pvr != null)
+                            listeObjets[i, j] = pvr;
+                    }
+                    else if (map[i, j] == 0)
                     {
                         ObjetAnime mur = load("mur");
-                        if(mur != null)
+                        if (mur != null)
                             listeObjets[i, j] = mur;
                     }
-                    else if(map[i, j] == 1)
+                    else if (map[i, j] == 1)
                     {
                         ObjetAnime haricot = load("haricot");
-                        if(haricot != null)
+                        if (haricot != null)
                             listeObjets[i, j] = haricot;
                     }
                 }
             }
+            ObjetAnime murFantome = new ObjetAnime(content.Load<Texture2D>(@"sprites\barriereFantome"), new Vector2(0f, 0f), new Vector2(20f, 20f), "mur");
+            listeObjets[12, 13] = murFantome;
+
         }
 
         public ObjetAnime load(String objet)
@@ -88,13 +115,19 @@ namespace Pacman
             // on charge un objet mur 
             if (objet == "mur")
             {
-                ObjetAnime mur = new ObjetAnime(content.Load<Texture2D>(@"sprites\mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
+                ObjetAnime mur = new ObjetAnime(content.Load<Texture2D>(@"sprites\mur"), new Vector2(0f, 0f), new Vector2(20f, 20f), "mur");
                 return mur;
             }
             //On charge un haricot
             else if (objet == "haricot")
             {
-                ObjetAnime haricot = new ObjetAnime(content.Load<Texture2D>(@"sprites\bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
+                ObjetAnime haricot = new ObjetAnime(content.Load<Texture2D>(@"sprites\bean"), new Vector2(0f, 0f), new Vector2(20f, 20f), "haricot");
+                return haricot;
+            }
+            //On charge un pouvoir
+            else if (objet == "pouvoir")
+            {
+                ObjetAnime haricot = new ObjetAnime(content.Load<Texture2D>(@"sprites\pouvoir"), new Vector2(0f, 0f), new Vector2(20f, 20f), "pouvoir");
                 return haricot;
             }
 
@@ -128,6 +161,16 @@ namespace Pacman
         public int getNbLig()
         {
             return NB_LIG;
+        }
+
+        public ObjetAnime[,] getListeObjets()
+        {
+            return listeObjets;
+        }
+
+        public void setListeObjets(ObjetAnime[,] newListeObjets)
+        {
+            this.listeObjets = newListeObjets;
         }
     }
 }

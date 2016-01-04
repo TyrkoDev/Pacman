@@ -73,8 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Carte.cs" />
+    <Compile Include="Collision.cs" />
     <Compile Include="ControleurDeplacement.cs" />
-    <Compile Include="HitBox.cs" />
+    <Compile Include="Fantome.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="ObjetAnime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

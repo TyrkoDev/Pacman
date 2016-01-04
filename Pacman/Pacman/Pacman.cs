@@ -22,6 +22,12 @@ namespace Pacman
         //Attributs
         Carte map;
         Joueur pacman;
+        Fantome fRouge;
+        Fantome fVert;
+        Fantome fBleu;
+        Fantome fRose;
+        Fantome[] listeFantome = new Fantome[4];
+        Collision collision;
 
         public Pacman()
         {
@@ -39,7 +45,16 @@ namespace Pacman
         {
             // TODO: Add your initialization logic here
             map = new Carte(Content);
-            pacman = new Joueur(Content);
+            collision = new Collision();
+            pacman = new Joueur(Content, map, collision);
+            fRouge = new Fantome(Content, map, collision, "fantomeRouge");
+            fVert = new Fantome(Content, map, collision, "fantomeVert");
+            fBleu = new Fantome(Content, map, collision, "fantomeBleu");
+            fRose = new Fantome(Content, map, collision, "fantomeRose");
+            listeFantome[0] = fRouge;
+            listeFantome[1] = fVert;
+            listeFantome[2] = fBleu;
+            listeFantome[3] = fRose;
 
             base.Initialize();
         }
@@ -82,6 +97,11 @@ namespace Pacman
 
             // TODO: Add your update logic here
             pacman.update();
+            for (int i = 0; i < listeFantome.Length; i++)
+            {
+                listeFantome[i].update();
+            }
+            collision.update(map, pacman, listeFantome);
 
             base.Update(gameTime);
         }
@@ -97,6 +117,10 @@ namespace Pacman
             // TODO: Add your drawing code here
             map.draw(spriteBatch);
             pacman.draw(spriteBatch);
+            fRouge.draw(spriteBatch);
+            fVert.draw(spriteBatch);
+            fBleu.draw(spriteBatch);
+            fRose.draw(spriteBatch);
 
             base.Draw(gameTime);
         }

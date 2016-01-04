@@ -9,6 +9,7 @@ namespace Pacman
     class ObjetAnime
     {
         private Texture2D _texture;    //  sprite texture 
+        private string name;
 
         public Texture2D Texture
         {
@@ -30,11 +31,24 @@ namespace Pacman
             set { _size = value; }
         }
 
-        public ObjetAnime(Texture2D texture, Vector2 position, Vector2 size)
+        public ObjetAnime(Texture2D texture, Vector2 position, Vector2 size, string name)
         {
             this._texture = texture;
             this._position = position;
             this._size = size;
+            this.name = name;
+        }
+
+        public string nom
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
         }
     }
 }

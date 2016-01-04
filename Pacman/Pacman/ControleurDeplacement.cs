@@ -11,35 +11,56 @@ namespace Pacman
         private KeyboardState keyboard;
         private String direction;
         private Joueur pacman;
+        private Carte carte;
+        private Collision collision;
 
-        public ControleurDeplacement(Joueur j) 
+        public ControleurDeplacement(Joueur j, Carte c, Collision collision) 
         {
             pacman = j;
-            direction = "droite";
+            carte = c;
+            this.collision = collision;
         }
 
         public void seDeplacer()
         {
             keyboard = Keyboard.GetState();
-
-            if (keyboard.IsKeyDown(Keys.Right))
+            if ((pacman.caseX() != -1) && (pacman.caseY() != -1))
             {
-                direction = "droite";
-            }
+                if (keyboard.IsKeyDown(Keys.Right))
+                {
+                    if (collision.verifyMur(carte, pacman, "droite"))
+                    {
+                        //pacman.v = 1;
+                        direction = "droite";
+                    }
+                }
 
-            if (keyboard.IsKeyDown(Keys.Left))
-            {
-                direction = "gauche";
-            }
+                if (keyboard.IsKeyDown(Keys.Left))
+                {
+                    if (collision.verifyMur(carte, pacman, "gauche"))
+                    {
+                        //pacman.v = 1;
+                        direction = "gauche";
+                    }
+                }
 
-            if (keyboard.IsKeyDown(Keys.Up))
-            {
-                direction = "haut";
-            }
+                if (keyboard.IsKeyDown(Keys.Up))
+                {
+                    if (collision.verifyMur(carte, pacman, "haut"))
+                    {
+                        //pacman.v = 1;
+                        direction = "haut";
+                    }
+                }
 
-            if (keyboard.IsKeyDown(Keys.Down))
-            {
-                direction = "bas";
+                if (keyboard.IsKeyDown(Keys.Down))
+                {
+                    if (collision.verifyMur(carte, pacman, "bas"))
+                    {
+                        //pacman.v = 1;
+                        direction = "bas";
+                    }
+                }
             }
         }
 
@@ -47,24 +68,41 @@ namespace Pacman
         {
             if (direction == "droite")
             {
-                pacman.x += pacman.v;
+                if (collision.verifyMur(carte, pacman, "droite"))
+                {
+                    pacman.x += pacman.v;
+                }
             }
 
             if (direction == "gauche")
             {
-                pacman.x -= pacman.v;
+                if (collision.verifyMur(carte, pacman, "gauche"))
+                {
+                    pacman.x -= pacman.v;
+                }
             }
 
             if (direction == "haut")
             {
-                pacman.y -= pacman.v;
+                if (collision.verifyMur(carte, pacman, "haut"))
+                {
+                    pacman.y -= pacman.v;
+                }
             }
 
             if (direction == "bas")
             {
-                pacman.y += pacman.v;
+                if (collision.verifyMur(carte, pacman, "bas"))
+                {
+                    pacman.y += pacman.v;
+                }
             }
         }
 
+        public String dir
+        {
+            get { return direction; }
+            set { direction = value; }
+        }
     }
 }
