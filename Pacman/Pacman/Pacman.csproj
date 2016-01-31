@@ -76,6 +76,7 @@
     <Compile Include="Collision.cs" />
     <Compile Include="ControleurDeplacement.cs" />
     <Compile Include="Fantome.cs" />
+    <Compile Include="Fantomes.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="ObjetAnime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

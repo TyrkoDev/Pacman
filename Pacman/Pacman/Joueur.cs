@@ -24,6 +24,8 @@ namespace Pacman
         private int vitesse;
         private ControleurDeplacement cd;
         private Stopwatch chrono;
+        private bool vie;
+        private bool over;
 
         public Joueur(ContentManager c, Carte carte, Collision collision)
         {
@@ -34,6 +36,8 @@ namespace Pacman
             cd = new ControleurDeplacement(this, carte, collision);
             pacman = new ObjetAnime(content.Load<Texture2D>(@"sprites\pacman"), new Vector2(0f, 0f), new Vector2(20f, 20f), "pacman");
             chrono = new Stopwatch();
+            vie = true;
+            over = false;
         }
 
         public void draw(SpriteBatch sb)
@@ -123,12 +127,84 @@ namespace Pacman
             }
         }
 
-        public void pouvoir(Fantome[] fantomes)
+        public void pouvoir(Fantomes fantomes)
         {
             vitesse = 2;
-            for(int i = 0; i < fantomes.Length; i++)
+            fantomes.setAfraid();
+        }
+
+        public void vivant(Fantomes fantomes, int index)
+        {
+            Fantome[] listeF = fantomes.liste;
+            for (int i = 0; i < listeF.Length; i++)
             {
-                fantomes[i].setAfraid(true);
+                if (listeF[i].isAfraid())
+                {
+                    if (index == i)
+                        fantomes.removeFantome(i);
+                }
+                else
+                    vie = false;
+            }
+        }
+
+        public bool estVivant()
+        {
+            if (!vie)
+            {
+                if (!chrono.IsRunning)
+                    chrono.Start();
+
+                if (chrono.ElapsedMilliseconds < 200)
+                {
+                    pacman.Texture = content.Load<Texture2D>(@"sprites\Mort0");
+                }
+                else if ((chrono.ElapsedMilliseconds > 200) && (chrono.ElapsedMilliseconds < 400))
+                {
+                    pacman.Texture = content.Load<Texture2D>(@"sprites\Mort1");
+                }
+                else if ((chrono.ElapsedMilliseconds > 400) && (chrono.ElapsedMilliseconds < 600))
+                {
+                    pacman.Texture = content.Load<Texture2D>(@"sprites\Mort2");
+                }
+                else if ((chrono.ElapsedMilliseconds > 800) && (chrono.ElapsedMilliseconds < 1000))
+                {
+                    pacman.Texture = content.Load<Texture2D>(@"sprites\Mort3");
+                }
+                else if (chrono.ElapsedMilliseconds > 1000)
+                {
+                    over = true;
+                    chrono.Stop();
+                    chrono.Reset();
+                }
+
+                return false;
+            }
+            else
+                return true;
+        }
+
+        public bool alive
+        {
+            get
+            {
+                return vie;
+            }
+            set
+            {
+                vie = value;
+            }
+        }
+
+        public bool fini
+        {
+            get
+            {
+                return over;
+            }
+            set
+            {
+                over = value;
             }
         }
 
