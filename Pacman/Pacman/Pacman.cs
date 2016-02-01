@@ -16,18 +16,20 @@ namespace Pacman
     /// </summary>
     public class Pacman : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         //Attributs
-        Carte map;
-        Joueur pacman;
-        Fantome fRouge;
-        Fantome fVert;
-        Fantome fBleu;
-        Fantome fRose;
-        Fantomes listeFantomes;
-        Collision collision;
+        private Carte map;
+        private Joueur pacman;
+        private Fantome fRouge;
+        private Fantome fVert;
+        private Fantome fBleu;
+        private Fantome fRose;
+        private Fantomes listeFantomes;
+        private Collision collision;
+        private Score score;
+        private Niveau niveau;
 
         public Pacman()
         {
@@ -45,8 +47,10 @@ namespace Pacman
         {
             // TODO: Add your initialization logic here
             map = new Carte(Content);
-            collision = new Collision();
+            collision = new Collision(Content);
             listeFantomes = new Fantomes();
+            score = Score.instanceScore(Content);
+            niveau = Niveau.instanceNiveau(Content);
             pacman = new Joueur(Content, map, collision);
             fRouge = new Fantome(Content, map, collision, "fantomeRouge");
             fVert = new Fantome(Content, map, collision, "fantomeVert");
@@ -70,7 +74,7 @@ namespace Pacman
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //  changing the back buffer size changes the window size (when in windowed mode)
-            graphics.PreferredBackBufferWidth = 560;
+            graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 620;
             graphics.ApplyChanges();
 
@@ -104,6 +108,15 @@ namespace Pacman
                 collision.update(map, pacman, listeFantomes);
             }
 
+            if (niveau.addNiveau(map))
+                nouveauNiveau();
+
+            if (pacman.fini)
+            {
+                nouveauNiveau();
+                reset();
+            }
+
             base.Update(gameTime);
         }
 
@@ -124,7 +137,32 @@ namespace Pacman
             if(pacman.alive)
                 listeFantomes.draw(spriteBatch);
 
+            score.draw(spriteBatch);
+            niveau.draw(spriteBatch);
+
             base.Draw(gameTime);
+        }
+
+        protected void nouveauNiveau()
+        {
+            map = new Carte(Content);
+            collision = new Collision(Content);
+            listeFantomes = new Fantomes();
+            pacman = new Joueur(Content, map, collision);
+            fRouge = new Fantome(Content, map, collision, "fantomeRouge");
+            fVert = new Fantome(Content, map, collision, "fantomeVert");
+            fBleu = new Fantome(Content, map, collision, "fantomeBleu");
+            fRose = new Fantome(Content, map, collision, "fantomeRose");
+            listeFantomes.addFantome(fRouge);
+            listeFantomes.addFantome(fVert);
+            listeFantomes.addFantome(fBleu);
+            listeFantomes.addFantome(fRose);
+        }
+
+        protected void reset()
+        {
+            niveau.reset();
+            score.reset();
         }
     }
 }

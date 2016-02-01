@@ -379,6 +379,15 @@
       <Output>D:\Projets\Pacman\Pacman\Pacman\bin\x86\Debug\Content\sprites\Siren.xnb</Output>
       <Time>2016-01-31T16:56:59.9559823+01:00</Time>
     </Item>
+    <Item>
+      <Source>SpriteFont1.spritefont</Source>
+      <Name>SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Projets\Pacman\Pacman\Pacman\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2016-02-01T12:01:47.5406963+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{7DB2858F-5138-4FDE-AB97-9781DDF8BE26}</ContentProjectGUID>
