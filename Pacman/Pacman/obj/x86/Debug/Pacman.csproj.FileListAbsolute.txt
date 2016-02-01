@@ -95,3 +95,4 @@ D:\Projets\Pacman\Pacman\Pacman\obj\x86\Debug\Microsoft.Xna.Framework.RuntimePro
 D:\Projets\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.exe
 D:\Projets\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.pdb
 D:\Projets\Pacman\Pacman\Pacman\bin\x86\Debug\Content\SpriteFont1.xnb
+C:\Users\Angelo\Desktop\Polytech\ISI\Pacman\Pacman\Pacman\bin\x86\Debug\Content\SpriteFont1.xnb
