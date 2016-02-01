@@ -60,8 +60,8 @@ namespace Pacman
         {
             content = c;
             initialisation();
-            pf = new PathFinding(map);
-            pf.dijkstra(10);
+            pf = new PathFinding(NB_COL*NB_LIG, map);
+            pf.Run();
         }
 
         public void initialisation()
