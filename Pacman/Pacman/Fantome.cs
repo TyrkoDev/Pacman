@@ -102,6 +102,11 @@ namespace Pacman
             afraid = set;
         }
 
+        public bool isAfraid()
+        {
+            return afraid;
+        }
+
         public int x
         {
             get

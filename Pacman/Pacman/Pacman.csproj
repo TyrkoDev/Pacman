@@ -76,11 +76,15 @@
     <Compile Include="Collision.cs" />
     <Compile Include="ControleurDeplacement.cs" />
     <Compile Include="Fantome.cs" />
+    <Compile Include="Fantomes.cs" />
     <Compile Include="Joueur.cs" />
+    <Compile Include="Niveau.cs" />
     <Compile Include="ObjetAnime.cs" />
+    <Compile Include="PathFinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Pacman.cs" />
+    <Compile Include="Score.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

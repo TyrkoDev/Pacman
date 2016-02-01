@@ -1,1 +1,2 @@
 C:\Users\Angelo\Desktop\Polytech\ISI\Pacman\Pacman\PacmanContent\obj\x86\Debug\PacmanContent.contentprojResolveAssemblyReference.cache
+D:\Projets\Pacman\Pacman\PacmanContent\obj\x86\Debug\PacmanContent.contentprojResolveAssemblyReference.cache
