@@ -26,11 +26,15 @@ namespace Pacman
         private String nom;
         private bool afraid;
         private String chemin;
+        private Collision collision;
+        private Carte map;
+        private String previous;
 
         public Fantome(ContentManager c, Carte carte, Collision collision, String nomFantome)
         {
             content = c;
             nom = nomFantome;
+            previous = "droite";
             if (nom == "fantomeRouge")
             {
                 xPos = 14 * 20;
@@ -55,6 +59,8 @@ namespace Pacman
             chemin = @"sprites\" + nomFantome;
             ghost = new ObjetAnime(content.Load<Texture2D>(chemin), new Vector2(0f, 0f), new Vector2(20f, 20f), "fantome");
             chrono = new Stopwatch();
+            this.collision = collision;
+            this.map = carte;
         }
 
         public void draw(SpriteBatch sb)
@@ -95,6 +101,37 @@ namespace Pacman
                     ghost = new ObjetAnime(content.Load<Texture2D>(chemin), new Vector2(0f, 0f), new Vector2(20f, 20f), chemin);
                 }
             }
+
+            String direction = collision.directionFantome(map, this, previous);
+
+            if (direction == "droite")
+            {
+                x += v;
+                previous = "droite";
+                Console.WriteLine("droite");
+            }
+
+            if (direction == "gauche")
+            {
+                x -= v;
+                previous = "gauche";
+                Console.WriteLine("gauche");
+            }
+
+            if (direction == "haut")
+            {
+                y -= v;
+                previous = "haut";
+                Console.WriteLine("haut");
+            }
+
+            if (direction == "bas")
+            {
+                y += v;
+                previous = "bas";
+                Console.WriteLine("bas");
+            }
+            
         }
 
         public void setAfraid(bool set)
