@@ -19,7 +19,6 @@ namespace Pacman
         private const int NB_LIG = 31;
         private ContentManager content;
         private ObjetAnime[,] listeObjets = new ObjetAnime[NB_LIG, NB_COL];
-        private PathFinding pf;
         private int[,] map = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
@@ -60,8 +59,6 @@ namespace Pacman
         {
             content = c;
             initialisation();
-            pf = new PathFinding(NB_COL*NB_LIG, map);
-            pf.Run();
         }
 
         public void initialisation()
