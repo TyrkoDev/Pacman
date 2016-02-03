@@ -141,6 +141,60 @@ namespace Pacman
                         {
                             newDir = "droite";
                         }
+                        else
+                        {
+                            if (liste[caseY, caseX - 1] != null)
+                            {
+                                if (liste[caseY, caseX - 1].nom != "mur")
+                                {
+                                    direction[i] = "gauche";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "gauche";
+                                i++;
+                            }
+
+                            if (liste[caseY + 1, caseX] != null)
+                            {
+                                if (liste[caseY + 1, caseX].nom != "mur")
+                                {
+                                    direction[i] = "bas";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "bas";
+                                i++;
+                            }
+
+                            if (liste[caseY - 1, caseX] != null)
+                            {
+                                if (liste[caseY - 1, caseX].nom != "mur")
+                                {
+                                    direction[i] = "haut";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "haut";
+                                i++;
+                            }
+
+                            String[] sortie = new String[i];
+
+                            for (int j = 0; j < sortie.Length; j++)
+                            {
+                                sortie[j] = direction[j];
+                            }
+
+                            int random = rnd.Next(0, sortie.Length);
+                            newDir = sortie[random];
+                        }
                     }
                     else
                     {
@@ -206,6 +260,60 @@ namespace Pacman
                         if (liste[caseY, caseX - 1].nom != "mur")
                         {
                             newDir = "gauche";
+                        }
+                        else
+                        {
+                            if (liste[caseY, caseX + 1] != null)
+                            {
+                                if (liste[caseY, caseX + 1].nom != "mur")
+                                {
+                                    direction[i] = "droite";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "droite";
+                                i++;
+                            }
+
+                            if (liste[caseY + 1, caseX] != null)
+                            {
+                                if (liste[caseY + 1, caseX].nom != "mur")
+                                {
+                                    direction[i] = "bas";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "bas";
+                                i++;
+                            }
+
+                            if (liste[caseY - 1, caseX] != null)
+                            {
+                                if (liste[caseY - 1, caseX].nom != "mur")
+                                {
+                                    direction[i] = "haut";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "haut";
+                                i++;
+                            }
+
+                            String[] sortie = new String[i];
+
+                            for (int j = 0; j < sortie.Length; j++)
+                            {
+                                sortie[j] = direction[j];
+                            }
+
+                            int random = rnd.Next(0, sortie.Length);
+                            newDir = sortie[random];
                         }
                     }
                     else
@@ -273,6 +381,60 @@ namespace Pacman
                         {
                             newDir = "haut";
                         }
+                        else
+                        {
+                            if (liste[caseY, caseX + 1] != null)
+                            {
+                                if (liste[caseY, caseX + 1].nom != "mur")
+                                {
+                                    direction[i] = "droite";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "droite";
+                                i++;
+                            }
+
+                            if (liste[caseY + 1, caseX] != null)
+                            {
+                                if (liste[caseY + 1, caseX].nom != "mur")
+                                {
+                                    direction[i] = "bas";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "bas";
+                                i++;
+                            }
+
+                            if (liste[caseY, caseX - 1] != null)
+                            {
+                                if (liste[caseY, caseX - 1].nom != "mur")
+                                {
+                                    direction[i] = "gauche";
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                direction[i] = "gauche";
+                                i++;
+                            }
+
+                            String[] sortie = new String[i];
+
+                            for (int j = 0; j < sortie.Length; j++)
+                            {
+                                sortie[j] = direction[j];
+                            }
+
+                            int random = rnd.Next(0, sortie.Length);
+                            newDir = sortie[random];
+                        }
                     }
                     else
                     {
@@ -338,7 +500,6 @@ namespace Pacman
                         if (liste[caseY + 1, caseX].nom != "mur")
                         {
                             newDir = "bas";
-                            i++;
                         }
                         else
                         {
@@ -393,10 +554,68 @@ namespace Pacman
 
                             int random = rnd.Next(0, sortie.Length);
                             newDir = sortie[random];
-
                         }
                     }
+                    else
+                    {
+                        if (liste[caseY, caseX + 1] != null)
+                        {
+                            if (liste[caseY, caseX + 1].nom != "mur")
+                            {
+                                direction[i] = "droite";
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            direction[i] = "droite";
+                            i++;
+                        }
+
+                        if (liste[caseY - 1, caseX] != null)
+                        {
+                            if (liste[caseY - 1, caseX].nom != "mur")
+                            {
+                                direction[i] = "haut";
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            direction[i] = "haut";
+                            i++;
+                        }
+
+                        if (liste[caseY, caseX - 1] != null)
+                        {
+                            if (liste[caseY, caseX - 1].nom != "mur")
+                            {
+                                direction[i] = "gauche";
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            direction[i] = "gauche";
+                            i++;
+                        }
+
+                        String[] sortie = new String[i];
+
+                        for (int j = 0; j < sortie.Length; j++)
+                        {
+                            sortie[j] = direction[j];
+                        }
+
+                        int random = rnd.Next(0, sortie.Length);
+                        newDir = sortie[random];
+
+                    }
                 }
+            }
+            else
+            {
+                newDir = dir;
             }
 
             return newDir;
