@@ -52,8 +52,9 @@ namespace Pacman
                         for (int k = 0; k < listeF.Length; k++)
                         {
                             Fantome f = listeF[k];
-                            if ((f.x >= (i * 20)) && (f.x <= (i * 21)) && (f.y >= (j * 20)) && (f.y <= (j * 21)) &&
-                                (pacman.x >= (i * 20)) && (pacman.x <= (i * 20)) && (pacman.y >= (j * 20)) && (pacman.y <= (j * 20)))
+                            /*if ((f.x >= (i * 20)) && (f.x <= (i * 21)) && (f.y >= (j * 20)) && (f.y <= (j * 21)) &&
+                                (pacman.x >= (i * 20)) && (pacman.x <= (i * 20)) && (pacman.y >= (j * 20)) && (pacman.y <= (j * 20)))*/
+                            if((f.caseXEucli() == pacman.caseXEucli()) && (f.caseYEucli() == pacman.caseYEucli()))
                                 pacman.vivant(fantomes, k);
                         }
                     }
@@ -122,7 +123,7 @@ namespace Pacman
         public String directionFantome(Carte carte, Fantome fantome, String dir)
         {
             ObjetAnime[,] liste = carte.getListeObjets();
-            String[] direction = new String[3];
+            String[] direction = new String[4];
             String newDir = "";
             int i = 0;
 
@@ -133,489 +134,88 @@ namespace Pacman
 
             if ((caseY != -1) && (caseX != -1))
             {
-                if (dir == "droite")
+                if (liste[caseY, caseX + 1] != null)
                 {
-                    if (liste[caseY, caseX + 1] != null)
+                    if (liste[caseY, caseX + 1].nom != "mur")
                     {
-                        if (liste[caseY, caseX + 1].nom != "mur")
-                        {
-                            newDir = "droite";
-                        }
-                        else
-                        {
-                            if (liste[caseY, caseX - 1] != null)
-                            {
-                                if (liste[caseY, caseX - 1].nom != "mur")
-                                {
-                                    direction[i] = "gauche";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "gauche";
-                                i++;
-                            }
-
-                            if (liste[caseY + 1, caseX] != null)
-                            {
-                                if (liste[caseY + 1, caseX].nom != "mur")
-                                {
-                                    direction[i] = "bas";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "bas";
-                                i++;
-                            }
-
-                            if (liste[caseY - 1, caseX] != null)
-                            {
-                                if (liste[caseY - 1, caseX].nom != "mur")
-                                {
-                                    direction[i] = "haut";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "haut";
-                                i++;
-                            }
-
-                            String[] sortie = new String[i];
-
-                            for (int j = 0; j < sortie.Length; j++)
-                            {
-                                sortie[j] = direction[j];
-                            }
-
-                            int random = rnd.Next(0, sortie.Length);
-                            newDir = sortie[random];
-                        }
-                    }
-                    else
-                    {
-                        if (liste[caseY, caseX - 1] != null)
-                        {
-                            if (liste[caseY, caseX - 1].nom != "mur")
-                            {
-                                direction[i] = "gauche";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "gauche";
-                            i++;
-                        }
-
-                        if (liste[caseY + 1, caseX] != null)
-                        {
-                            if (liste[caseY + 1, caseX].nom != "mur")
-                            {
-                                direction[i] = "bas";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "bas";
-                            i++;
-                        }
-
-                        if (liste[caseY - 1, caseX] != null)
-                        {
-                            if (liste[caseY - 1, caseX].nom != "mur")
-                            {
-                                direction[i] = "haut";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "haut";
-                            i++;
-                        }
-
-                        String[] sortie = new String[i];
-
-                        for (int j = 0; j < sortie.Length; j++)
-                        {
-                            sortie[j] = direction[j];
-                        }
-
-                        int random = rnd.Next(0, sortie.Length);
-                        newDir = sortie[random];
-
+                        direction[i] = "droite";
+                        i++;
                     }
                 }
-
-                if (dir == "gauche")
+                else
                 {
-                    if (liste[caseY, caseX - 1] != null)
-                    {
-                        if (liste[caseY, caseX - 1].nom != "mur")
-                        {
-                            newDir = "gauche";
-                        }
-                        else
-                        {
-                            if (liste[caseY, caseX + 1] != null)
-                            {
-                                if (liste[caseY, caseX + 1].nom != "mur")
-                                {
-                                    direction[i] = "droite";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "droite";
-                                i++;
-                            }
-
-                            if (liste[caseY + 1, caseX] != null)
-                            {
-                                if (liste[caseY + 1, caseX].nom != "mur")
-                                {
-                                    direction[i] = "bas";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "bas";
-                                i++;
-                            }
-
-                            if (liste[caseY - 1, caseX] != null)
-                            {
-                                if (liste[caseY - 1, caseX].nom != "mur")
-                                {
-                                    direction[i] = "haut";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "haut";
-                                i++;
-                            }
-
-                            String[] sortie = new String[i];
-
-                            for (int j = 0; j < sortie.Length; j++)
-                            {
-                                sortie[j] = direction[j];
-                            }
-
-                            int random = rnd.Next(0, sortie.Length);
-                            newDir = sortie[random];
-                        }
-                    }
-                    else
-                    {
-                        if (liste[caseY, caseX + 1] != null)
-                        {
-                            if (liste[caseY, caseX + 1].nom != "mur")
-                            {
-                                direction[i] = "droite";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "droite";
-                            i++;
-                        }
-
-                        if (liste[caseY + 1, caseX] != null)
-                        {
-                            if (liste[caseY + 1, caseX].nom != "mur")
-                            {
-                                direction[i] = "bas";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "bas";
-                            i++;
-                        }
-
-                        if (liste[caseY - 1, caseX] != null)
-                        {
-                            if (liste[caseY - 1, caseX].nom != "mur")
-                            {
-                                direction[i] = "haut";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "haut";
-                            i++;
-                        }
-
-                        String[] sortie = new String[i];
-
-                        for (int j = 0; j < sortie.Length; j++)
-                        {
-                            sortie[j] = direction[j];
-                        }
-
-                        int random = rnd.Next(0, sortie.Length);
-                        newDir = sortie[random];
-
-                    }
-                }
-                
-                if (dir == "haut")
-                {
-                    if (liste[caseY - 1, caseX] != null)
-                    {
-                        if (liste[caseY - 1, caseX].nom != "mur")
-                        {
-                            newDir = "haut";
-                        }
-                        else
-                        {
-                            if (liste[caseY, caseX + 1] != null)
-                            {
-                                if (liste[caseY, caseX + 1].nom != "mur")
-                                {
-                                    direction[i] = "droite";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "droite";
-                                i++;
-                            }
-
-                            if (liste[caseY + 1, caseX] != null)
-                            {
-                                if (liste[caseY + 1, caseX].nom != "mur")
-                                {
-                                    direction[i] = "bas";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "bas";
-                                i++;
-                            }
-
-                            if (liste[caseY, caseX - 1] != null)
-                            {
-                                if (liste[caseY, caseX - 1].nom != "mur")
-                                {
-                                    direction[i] = "gauche";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "gauche";
-                                i++;
-                            }
-
-                            String[] sortie = new String[i];
-
-                            for (int j = 0; j < sortie.Length; j++)
-                            {
-                                sortie[j] = direction[j];
-                            }
-
-                            int random = rnd.Next(0, sortie.Length);
-                            newDir = sortie[random];
-                        }
-                    }
-                    else
-                    {
-                        if (liste[caseY, caseX + 1] != null)
-                        {
-                            if (liste[caseY, caseX + 1].nom != "mur")
-                            {
-                                direction[i] = "droite";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "droite";
-                            i++;
-                        }
-
-                        if (liste[caseY + 1, caseX] != null)
-                        {
-                            if (liste[caseY + 1, caseX].nom != "mur")
-                            {
-                                direction[i] = "bas";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "bas";
-                            i++;
-                        }
-
-                        if (liste[caseY, caseX - 1] != null)
-                        {
-                            if (liste[caseY, caseX - 1].nom != "mur")
-                            {
-                                direction[i] = "gauche";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "gauche";
-                            i++;
-                        }
-
-                        String[] sortie = new String[i];
-
-                        for (int j = 0; j < sortie.Length; j++)
-                        {
-                            sortie[j] = direction[j];
-                        }
-
-                        int random = rnd.Next(0, sortie.Length);
-                        newDir = sortie[random];
-
-                    }
+                    direction[i] = "droite";
+                    i++;
                 }
 
-                if (dir == "bas")
+                if (liste[caseY, caseX - 1] != null)
                 {
-                    if (liste[caseY + 1, caseX] != null)
+                    if (liste[caseY, caseX - 1].nom != "mur")
                     {
-                        if (liste[caseY + 1, caseX].nom != "mur")
-                        {
-                            newDir = "bas";
-                        }
-                        else
-                        {
-                            if (liste[caseY, caseX + 1] != null)
-                            {
-                                if (liste[caseY, caseX + 1].nom != "mur")
-                                {
-                                    direction[i] = "droite";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "droite";
-                                i++;
-                            }
-
-                            if (liste[caseY - 1, caseX] != null)
-                            {
-                                if (liste[caseY - 1, caseX].nom != "mur")
-                                {
-                                    direction[i] = "haut";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "haut";
-                                i++;
-                            }
-
-                            if (liste[caseY, caseX - 1] != null)
-                            {
-                                if (liste[caseY, caseX - 1].nom != "mur")
-                                {
-                                    direction[i] = "gauche";
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                direction[i] = "gauche";
-                                i++;
-                            }
-
-                            String[] sortie = new String[i];
-
-                            for (int j = 0; j < sortie.Length; j++)
-                            {
-                                sortie[j] = direction[j];
-                            }
-
-                            int random = rnd.Next(0, sortie.Length);
-                            newDir = sortie[random];
-                        }
+                        direction[i] = "gauche";
+                        i++;
                     }
-                    else
+                }
+                else
+                {
+                    direction[i] = "gauche";
+                    i++;
+                }
+
+                if (liste[caseY - 1, caseX] != null)
+                {
+                    if (liste[caseY - 1, caseX].nom != "mur")
                     {
-                        if (liste[caseY, caseX + 1] != null)
-                        {
-                            if (liste[caseY, caseX + 1].nom != "mur")
-                            {
-                                direction[i] = "droite";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "droite";
-                            i++;
-                        }
-
-                        if (liste[caseY - 1, caseX] != null)
-                        {
-                            if (liste[caseY - 1, caseX].nom != "mur")
-                            {
-                                direction[i] = "haut";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "haut";
-                            i++;
-                        }
-
-                        if (liste[caseY, caseX - 1] != null)
-                        {
-                            if (liste[caseY, caseX - 1].nom != "mur")
-                            {
-                                direction[i] = "gauche";
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            direction[i] = "gauche";
-                            i++;
-                        }
-
-                        String[] sortie = new String[i];
-
-                        for (int j = 0; j < sortie.Length; j++)
-                        {
-                            sortie[j] = direction[j];
-                        }
-
-                        int random = rnd.Next(0, sortie.Length);
-                        newDir = sortie[random];
-
+                        direction[i] = "haut";
+                        i++;
                     }
+                }
+                else
+                {
+                    direction[i] = "haut";
+                    i++;
+                }
+
+                if (liste[caseY + 1, caseX] != null)
+                {
+                    if (liste[caseY + 1, caseX].nom != "mur")
+                    {
+                        direction[i] = "bas";
+                        i++;
+                    }
+                }
+                else
+                {
+                    direction[i] = "bas";
+                    i++;
                 }
             }
             else
-            {
                 newDir = dir;
+
+            String[] sortie = new String[i];
+
+            for (int j = 0; j < sortie.Length; j++)
+            {
+                sortie[j] = direction[j];
+            }
+
+            if (sortie.Length > 2)
+            {
+                int random = rnd.Next(0, direction.Length);
+                newDir = direction[random];
+            } 
+            else
+            {
+                if (sortie.Length > 1)
+                {
+                    if (sortie[0] == dir)
+                        newDir = sortie[0];
+                    else
+                        newDir = sortie[1];
+                }
+                else if (sortie.Length > 0)
+                    newDir = sortie[0];
             }
 
             return newDir;

@@ -29,12 +29,15 @@ namespace Pacman
         private Collision collision;
         private Carte map;
         private String previous;
+        private bool sortie;
+        private string direction;
 
         public Fantome(ContentManager c, Carte carte, Collision collision, String nomFantome)
         {
             content = c;
             nom = nomFantome;
             previous = "droite";
+            sortie = false;
             if (nom == "fantomeRouge")
             {
                 xPos = 14 * 20;
@@ -102,36 +105,85 @@ namespace Pacman
                 }
             }
 
-            String direction = collision.directionFantome(map, this, previous);
-
-            if (direction == "droite")
+            direction = collision.directionFantome(map, this, previous);
+            if (sortie)
             {
-                x += v;
-                previous = "droite";
-                Console.WriteLine("droite");
-            }
+                if (direction == "droite")
+                {
+                    x += v;
+                    previous = "droite";
+                }
 
-            if (direction == "gauche")
-            {
-                x -= v;
-                previous = "gauche";
-                Console.WriteLine("gauche");
-            }
+                if (direction == "gauche")
+                {
+                    x -= v;
+                    previous = "gauche";
+                }
 
-            if (direction == "haut")
-            {
-                y -= v;
-                previous = "haut";
-                Console.WriteLine("haut");
-            }
+                if (direction == "haut")
+                {
+                    y -= v;
+                    previous = "haut";
+                }
 
-            if (direction == "bas")
-            {
-                y += v;
-                previous = "bas";
-                Console.WriteLine("bas");
+                if (direction == "bas")
+                {
+                    y += v;
+                    previous = "bas";
+                }
             }
+            else
+                sortir();
             
+        }
+
+        public void sortir()
+        {
+            if (nom == "fantomeRouge")
+            {
+                sortie = true;
+            }
+            else if (nom == "fantomeVert")
+            {
+                if (y != 220)
+                {
+                    this.y -= this.v;
+                }
+                else
+                {
+                    sortie = true;
+                    direction = "gauche";
+                }
+
+            }
+            else if (nom == "fantomeBleu")
+            {
+                if (y > 260)
+                    this.y -= this.v;
+                else if (x > 280)
+                    this.x -= this.v;
+                else if (y > 220)
+                    this.y -= this.v;
+                else
+                {
+                    direction = "droite";
+                    sortie = true;
+                }
+            }
+            else if (nom == "fantomeRose")
+            {
+                if (y > 260)
+                    this.y -= this.v;
+                else if (x < 260)
+                    this.x += this.v;
+                else if (y > 220)
+                    this.y -= this.v;
+                else
+                {
+                    direction = "gauche";
+                    sortie = true;
+                }
+            }
         }
 
         public void setAfraid(bool set)
@@ -180,6 +232,18 @@ namespace Pacman
             }
         }
 
+        public bool demarrage
+        {
+            get
+            {
+                return sortie;
+            }
+            set
+            {
+                sortie = value;
+            }
+        }
+
         public int caseX()
         {
             if (xPos % 20 == 0)
@@ -194,6 +258,16 @@ namespace Pacman
                 return yPos / 20;
             else
                 return -1;
+        }
+
+        public int caseXEucli()
+        {
+            return xPos / 20;
+        }
+
+        public int caseYEucli()
+        {
+            return yPos / 20;
         }
     }
 }

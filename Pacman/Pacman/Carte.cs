@@ -63,6 +63,9 @@ namespace Pacman
 
         public void initialisation()
         {
+            ObjetAnime murFantome = new ObjetAnime(content.Load<Texture2D>(@"sprites\barriereFantome"), new Vector2(0f, 0f), new Vector2(20f, 20f), "mur");
+            listeObjets[12, 13] = murFantome;
+            listeObjets[12, 14] = murFantome;
             for(int i = 0; i < NB_LIG; i++)
             {
                 for (int j = 0; j < NB_COL; j++)
@@ -105,8 +108,6 @@ namespace Pacman
                     }
                 }
             }
-            ObjetAnime murFantome = new ObjetAnime(content.Load<Texture2D>(@"sprites\barriereFantome"), new Vector2(0f, 0f), new Vector2(20f, 20f), "mur");
-            listeObjets[12, 13] = murFantome;
 
         }
 

@@ -49,11 +49,13 @@ namespace Pacman
             sb.End();
         }
 
-        public void update()
+        public void update(Fantomes fantomes)
         {
             cd.seDeplacer();
             cd.update();
             String direction = cd.dir;
+            if (fantomes.getAfraid())
+                this.v = 1;
 
             if(!chrono.IsRunning)
                 chrono.Start();
@@ -258,6 +260,16 @@ namespace Pacman
                 return yPos / 20;
             else
                 return -1;
+        }
+
+        public int caseXEucli()
+        {
+            return xPos / 20;
+        }
+
+        public int caseYEucli()
+        {
+            return yPos / 20;
         }
 
     }

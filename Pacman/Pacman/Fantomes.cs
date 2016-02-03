@@ -36,6 +36,17 @@ namespace Pacman
             }
         }
 
+        public bool getAfraid()
+        {
+            bool sortie = false;
+            for (int i = 0; i < listeFantome.Length; i++)
+            {
+                if (listeFantome[i].isAfraid())
+                    sortie = true;
+            }
+            return sortie;
+        }
+
         public void update()
         {
             for (int i = 0; i < listeFantome.Length; i++)

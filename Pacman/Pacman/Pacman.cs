@@ -103,7 +103,7 @@ namespace Pacman
             // TODO: Add your update logic here
             if (pacman.estVivant())
             {
-                pacman.update();
+                pacman.update(listeFantomes);
                 listeFantomes.update();
                 collision.update(map, pacman, listeFantomes);
             }
